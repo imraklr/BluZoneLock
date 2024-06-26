@@ -1,1 +1,1 @@
-# $${\color{lightblue}Blu\color{white}ZoneLock}$$
+# $${\color{lightblue}Blu\color{gray}ZoneLock}$$
