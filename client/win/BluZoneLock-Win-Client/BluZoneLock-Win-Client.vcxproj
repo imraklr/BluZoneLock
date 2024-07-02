@@ -139,6 +139,7 @@
     <ClCompile Include="src\UI\ConsoleUI\transitioning\transitioning.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\UI\ConsoleUI\ConsoleUI.h" />
     <ClInclude Include="src\UI\ConsoleUI\PagesInfo.h" />
     <ClInclude Include="src\UI\ConsoleUI\error\error.h" />
@@ -148,6 +149,12 @@
     <ClInclude Include="src\UI\ConsoleUI\PagingManager.h" />
     <ClInclude Include="src\UI\ConsoleUI\Status\status.h" />
     <ClInclude Include="src\UI\ConsoleUI\transitioning\transitioning.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BluZoneLock-Win-Client.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\Icons\BluZoneLock.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
