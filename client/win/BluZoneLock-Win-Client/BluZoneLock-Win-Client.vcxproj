@@ -128,6 +128,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src/BluZoneLock-Win-Client.cpp" />
+    <ClCompile Include="src\UI\ConsoleUI\ConsoleUI.cpp" />
+    <ClCompile Include="src\UI\ConsoleUI\error\error.cpp" />
+    <ClCompile Include="src\UI\ConsoleUI\Incoming\incoming.cpp" />
+    <ClCompile Include="src\UI\ConsoleUI\logging\logging.cpp" />
+    <ClCompile Include="src\UI\ConsoleUI\Outgoing\outgoing.cpp" />
+    <ClCompile Include="src\UI\ConsoleUI\PagesInfo.cpp" />
+    <ClCompile Include="src\UI\ConsoleUI\PagingManager.cpp" />
+    <ClCompile Include="src\UI\ConsoleUI\Status\status.cpp" />
+    <ClCompile Include="src\UI\ConsoleUI\transitioning\transitioning.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\UI\ConsoleUI\ConsoleUI.h" />
+    <ClInclude Include="src\UI\ConsoleUI\PagesInfo.h" />
+    <ClInclude Include="src\UI\ConsoleUI\error\error.h" />
+    <ClInclude Include="src\UI\ConsoleUI\Incoming\incoming.h" />
+    <ClInclude Include="src\UI\ConsoleUI\logging\logging.h" />
+    <ClInclude Include="src\UI\ConsoleUI\Outgoing\outgoing.h" />
+    <ClInclude Include="src\UI\ConsoleUI\PagingManager.h" />
+    <ClInclude Include="src\UI\ConsoleUI\Status\status.h" />
+    <ClInclude Include="src\UI\ConsoleUI\transitioning\transitioning.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

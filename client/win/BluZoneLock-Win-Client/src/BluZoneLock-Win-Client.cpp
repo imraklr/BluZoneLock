@@ -3,9 +3,9 @@
 * This Bluetooth application runs in client mode only and operates within a console environment.
 */
 
+#include <Windows.h>
 #include <iostream>
-
-using namespace std;
+#include "UI/ConsoleUI/PagingManager.h"
 
 /**
 * @file BluZoneLock-Win-Client.cpp
@@ -13,8 +13,28 @@ using namespace std;
 * @details This console application initiates a Bluetooth connection in client mode.
 *
 * @author Rakesh Kumar
-* @date June 28, 2024
+* @date July 2, 2024
 */
 int main() {
-    cout << "TODO\n" << endl;
+
+    // get the reference to cout, cerr, cin streams
+    std::istream& input_stream = std::cin;
+    std::ostream& output_stream = std::cout;
+    std::ostream& error_stream = std::cerr;
+
+
+    // Retrieve the console handle
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    if (hConsole == NULL) {
+        std::cout << "StdHandle retrieval failure" << std::endl;
+    }
+    else {
+        // obtain PagingManager instance ( initializes pages and draws status page title)
+        PagingManager &pagingManager = PagingManager::getInstance(output_stream, hConsole);
+    }
+
+    system("pause");
+
+    return 0;
 }
