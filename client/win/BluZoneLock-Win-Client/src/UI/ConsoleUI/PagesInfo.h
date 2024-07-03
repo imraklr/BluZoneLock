@@ -19,9 +19,10 @@
 // function to print RGB based color to a specific piece of text (optional line termination)
 extern void printInRGB(
     std::string piece,
-    short fR, short fG, short fB,    // For Foreground color
-    short bR, short bG, short bB, // For Background color
+    unsigned char fR, unsigned char fG, unsigned char fB,    // For Foreground color
+    unsigned char bR, unsigned char bG, unsigned char bB, // For Background color
     bool terminateLine, bool flushOutputStream, bool resetColorAfterOutput,
+    int paddingLeft,
     HANDLE, std::ostream&
 );
 extern void printInRGB(
@@ -29,6 +30,22 @@ extern void printInRGB(
     bool forForeground,
     unsigned char R, unsigned char G, unsigned char B, // For foreground color
     bool terminateLine, bool flushOutputStream, bool resetColorAfterOutput,
+    int paddingLeft,
+    HANDLE hConsole, std::ostream& rOutputStream
+);
+extern void printDivider(
+    char dividerSymbol,
+    bool forForeground,
+    unsigned char R, unsigned char G, unsigned char B,
+    int paddingLeft,
+    HANDLE hConsole, std::ostream& rOutputStream
+);
+extern void printDivider(
+    char dividerSymbol,
+    bool forForeground,
+    unsigned char fR, unsigned char fG, unsigned char fB,    // For Foreground color
+    unsigned char bR, unsigned char bG, unsigned char bB,    // For Background color
+    int paddingLeft,
     HANDLE hConsole, std::ostream& rOutputStream
 );
 

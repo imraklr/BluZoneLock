@@ -31,7 +31,7 @@ int main() {
     }
     else {
         // obtain PagingManager instance ( initializes pages and draws status page title)
-        PagingManager &pagingManager = PagingManager::getInstance(output_stream, hConsole);
+        PagingManager& pagingManager = PagingManager::getInstance(output_stream, hConsole);
     }
 
     system("pause");
