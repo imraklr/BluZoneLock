@@ -123,6 +123,6 @@ struct PageList {
     // Destructor to clean up allocated memory
     ~PageList() {}
 };
-extern struct PageList pagelist;
+extern struct PageList pageList;
 
 #endif
