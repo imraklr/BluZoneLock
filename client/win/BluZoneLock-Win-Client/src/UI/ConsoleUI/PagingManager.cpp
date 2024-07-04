@@ -30,6 +30,7 @@ Page PagingManager::nextPage() {
     // Clear Console
     clearConsole();
     // Show the title
+    pageList.currentPage.fpTitleF(rOutputStream, hConsole);
     // Show the header
 
     return pageList.currentPage;
@@ -45,7 +46,9 @@ Page PagingManager::prevPage() {
     pageList.currentPage = pageList.pageArray[pageList.index];
 
     // Clear console
+    clearConsole();
     // show the title
+    pageList.currentPage.fpTitleF(rOutputStream, hConsole);
     // show the header
 
     return pageList.currentPage;
@@ -60,7 +63,9 @@ Page PagingManager::mthPage(uint_fast8_t M) {
     }
 
     // Clear console
+    clearConsole();
     // show the title
+    pageList.currentPage.fpTitleF(rOutputStream, hConsole);
     // show the header
 
     return pageList.currentPage; // return a reference to currentPage even in case of faulty M'th page request. Use the function
