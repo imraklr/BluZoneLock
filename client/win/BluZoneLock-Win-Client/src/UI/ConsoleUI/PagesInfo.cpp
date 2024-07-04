@@ -10,9 +10,6 @@
 // The writeTitle function which prints the application name
 void writeTitle(std::ostream& rOutputStream, HANDLE hConsole) {
 
-    // Clear Console
-    system("cls");
-
     CONSOLE_SCREEN_BUFFER_INFO consoleScreenBufferInfo;
 
     GetConsoleScreenBufferInfo(hConsole, &consoleScreenBufferInfo);
@@ -27,7 +24,6 @@ void writeTitle(std::ostream& rOutputStream, HANDLE hConsole) {
     // Here u = length of string "BluZoneLock"
     int u = APPLICATION_NAME_LENGTH;
     int x = (consoleWidth - u) >> 1;
-    x += APPLICATION_NAME_LENGTH + 8; // Add extra 8 to center the name
 
     printInRGB("Blu", true, 173, 216, 230, false, false, true, x, hConsole, rOutputStream);
     printInRGB("ZoneLock", true, 128, 128, 128, true, true, true, 0, hConsole, rOutputStream);
@@ -46,11 +42,10 @@ void printInRGB(
     std::string foregroundColorSequence = "\x1B[38;2;" + std::to_string(fR) + ";" + std::to_string(fG) + ";" + std::to_string(fB) + "m";
     std::string backgroundColorSequence = "\x1B[48;2;" + std::to_string(bR) + ";" + std::to_string(bG) + ";" + std::to_string(bB) + "m";
 
+    rOutputStream << std::string(paddingLeft, ' ') << foregroundColorSequence << backgroundColorSequence << piece;
+
     if (terminateLine) {
-        rOutputStream << std::left << std::setw(paddingLeft) << foregroundColorSequence << backgroundColorSequence << piece << std::endl;
-    }
-    else {
-        rOutputStream << std::left << std::setw(paddingLeft) << foregroundColorSequence << backgroundColorSequence << piece;
+        rOutputStream << std::endl;
     }
 
     if (resetColorAfterOutput) {
@@ -79,11 +74,10 @@ void printInRGB(
         colorSequence = "\x1B[48;2;" + std::to_string(R) + ";" + std::to_string(G) + ";" + std::to_string(B) + "m";
     }
 
+    rOutputStream << std::string(paddingLeft, ' ') << colorSequence << piece;
+
     if (terminateLine) {
-        rOutputStream << std::left << std::setw(paddingLeft) << colorSequence << piece << std::endl;
-    }
-    else {
-        rOutputStream << std::left << std::setw(paddingLeft) << colorSequence << piece;
+        rOutputStream << std::endl;
     }
 
     if (resetColorAfterOutput) {
@@ -120,7 +114,7 @@ void printDivider(
     int consoleWidth = consoleScreenBufferInfo.srWindow.Right - consoleScreenBufferInfo.srWindow.Left + 1;
 
     // Print the divider with specified padding and color
-    rOutputStream << std::left << std::setw(paddingLeft) << colorSequence << std::setfill(dividerSymbol) << std::string(consoleWidth, dividerSymbol) << std::endl;
+    rOutputStream << std::string(paddingLeft, ' ') << colorSequence << std::setfill(dividerSymbol) << std::string(consoleWidth, dividerSymbol) << std::endl;
 
     // Reset color
     rOutputStream << "\x1B[0m";
@@ -148,7 +142,7 @@ void printDivider(
     int consoleWidth = consoleScreenBufferInfo.srWindow.Right - consoleScreenBufferInfo.srWindow.Left + 1;
 
     // Print the divider with specified padding, foreground and background colors
-    rOutputStream << std::left << std::setw(paddingLeft) << foregroundColorSequence << backgroundColorSequence << std::setfill(dividerSymbol) << std::string(consoleWidth, dividerSymbol) << std::endl;
+    rOutputStream << std::string(paddingLeft, ' ') << foregroundColorSequence << backgroundColorSequence << std::setfill(dividerSymbol) << std::string(consoleWidth, dividerSymbol) << std::endl;
 
     // Reset color
     rOutputStream << "\x1B[0m";
