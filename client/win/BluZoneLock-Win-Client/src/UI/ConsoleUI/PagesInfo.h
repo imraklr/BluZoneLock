@@ -303,14 +303,7 @@ struct PageList {
                 currentPage = pageArray[page.page_number - 1];
             }
         }
-        /// @deprecated REDUNDANT else block, marked for removal
-        else {
-            // write to the output
-        }
     }
-
-    // @deprecated REDUNDANT function, marked for removal
-    void showHeader(std::ostream& output_stream) {}
 
     PageList() : index(0), currentPage{}, pageArray{} {}
     ~PageList() {}
