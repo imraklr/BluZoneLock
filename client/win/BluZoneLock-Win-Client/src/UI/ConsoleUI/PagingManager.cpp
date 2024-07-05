@@ -78,7 +78,7 @@ Page PagingManager::nextPage() {
  */
 Page PagingManager::prevPage() {
     if (pageList.index == 0) {
-        pageList.index = 2;
+        pageList.index = MAXIMUM_ALLOWED_NUMBER_OF_PAGES - 1;
     }
     else {
         --(pageList.index);
