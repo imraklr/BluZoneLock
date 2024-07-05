@@ -36,9 +36,6 @@
     <ClCompile Include="src\UI\ConsoleUI\Status\status.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\UI\ConsoleUI\transitioning\transitioning.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\UI\ConsoleUI\PagingManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\UI\ConsoleUI\PagingManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI\ConsoleUI\transitioning\transitioning.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\UI\ConsoleUI\PagesInfo.h">

@@ -28,9 +28,8 @@
 #include <sal.h>
 #include <Windows.h>
 
-// only 6 pages are there: incoming, outgoing, status(or health), logging screen , transitioning 
-// screen, error screen
-#define MAXIMUM_ALLOWED_NUMBER_OF_PAGES 6
+// only 5 pages are there: incoming, outgoing, status(or health), logging screen, error screen
+#define MAXIMUM_ALLOWED_NUMBER_OF_PAGES 5
 #define MINIMUM_ALLOWED_NUMBER_OF_PAGES 1
 // If the screen is transitioning from one to another, display this message in a new view and then 
 // change to the desired page
