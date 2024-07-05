@@ -1,4 +1,9 @@
-// logging.h
+/**
+ * @file logging.h
+ *
+ * @author Rakesh Kumar
+ */
+
 #pragma once
 
 #ifndef LOGGING_H

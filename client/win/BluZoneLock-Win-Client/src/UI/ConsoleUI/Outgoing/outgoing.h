@@ -1,4 +1,9 @@
-// outgoing.h
+/**
+ * @file outgoing.h
+ *
+ * @author Rakesh Kumar
+ */
+
 #pragma once
 
 #ifndef OUTGOING_H

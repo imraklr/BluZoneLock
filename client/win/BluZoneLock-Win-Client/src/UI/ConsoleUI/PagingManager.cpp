@@ -1,4 +1,12 @@
-// PagingManager.cpp
+/**
+ * @file PagingManager.cpp
+ * @brief Implementation of the PagingManager class.
+ *
+ * This file contains the implementation of the PagingManager class, including its
+ * member functions and the singleton instance management.
+ *
+ * @author Rakesh Kumar
+ */
 
 #include "PagingManager.h"
 #include "PagesInfo.h"
@@ -6,23 +14,48 @@
 
 // Static instance initialization
 static PagingManager* instance = nullptr;
-// struct PageList global instance
+// Global instance of struct PageList
 struct PageList pageList;
 
+/**
+ * @brief Get the singleton instance of PagingManager.
+ *
+ * This function returns the singleton instance of PagingManager. It takes
+ * a reference to an output stream and a handle to the console as parameters.
+ *
+ * @param rOutputStream Reference to an output stream.
+ * @param hConsole Handle to the console.
+ * @return The singleton instance of PagingManager.
+ */
 PagingManager& PagingManager::getInstance(std::ostream& rOutputStream, HANDLE hConsole) {
-    // Lazy initialization of the singleton instance
     if (!instance) {
         instance = new PagingManager(rOutputStream, hConsole);
     }
     return *instance;
 }
 
+/**
+ * @brief Constructor.
+ *
+ * This constructor initializes the PagingManager with the provided
+ * output stream and console handle. It is private to enforce the singleton pattern.
+ *
+ * @param rOutputStream Reference to an output stream.
+ * @param hConsole Handle to the console.
+ */
 PagingManager::PagingManager(std::ostream& rOutputStream, HANDLE hConsole)
     : rOutputStream(rOutputStream), hConsole(hConsole) {
     // Constructor implementation
     PagingManager::init();
 }
 
+/**
+ * @brief Move to the next page.
+ *
+ * This function changes the view to the next page and returns it.
+ *
+ * @return The next page (instance of `struct Page`).
+ */
 Page PagingManager::nextPage() {
     pageList.index = (++(pageList.index)) % MAXIMUM_ALLOWED_NUMBER_OF_PAGES; // 0-indexing
     pageList.currentPage = pageList.pageArray[pageList.index];
@@ -36,9 +69,16 @@ Page PagingManager::nextPage() {
     return pageList.currentPage;
 }
 
+/**
+ * @brief Move to the previous page.
+ *
+ * This function changes the view to the previous page and returns it.
+ *
+ * @return The previous page (instance of `struct Page`).
+ */
 Page PagingManager::prevPage() {
     if (pageList.index == 0) {
-        pageList.index = 2; // because we are going circular
+        pageList.index = 2;
     }
     else {
         --(pageList.index);
@@ -54,11 +94,22 @@ Page PagingManager::prevPage() {
     return pageList.currentPage;
 }
 
+/**
+ * @brief Move to the Mth page where M is the page number.
+ *
+ * This function changes the view to the Mth page and returns it.
+ *
+ * @return The Mth page (instance of `struct Page`) OR if incorrect page number is supplied 
+ * then the current page instance is returned. Use this function in conjunction with 
+ * `isTheSamePage(struct Page* thisPage)` function to know if returned page instance matches 
+ * the page that the user is on. This prevents huge rewrites to the screen.
+ */
 Page PagingManager::mthPage(uint_fast8_t M) {
     if (!(
         M > MAXIMUM_ALLOWED_NUMBER_OF_PAGES && M < MINIMUM_ALLOWED_NUMBER_OF_PAGES
         )) {
-        pageList.index = M - 1; // considering that the end-user does not know 0-indexing
+        // M cannot be zero, as the user is not aware of 0-based indexing in computer programs.
+        pageList.index = M - 1;
         pageList.currentPage = pageList.pageArray[pageList.index];
     }
 
@@ -68,21 +119,40 @@ Page PagingManager::mthPage(uint_fast8_t M) {
     pageList.currentPage.fpTitleF(rOutputStream, hConsole);
     // show the header
 
-    return pageList.currentPage; // return a reference to currentPage even in case of faulty M'th page request. Use the function
-    // isTheSamePage to know if this currentPage obtained using this function matches the page that the user is on. This prevents
-    // huge rewrites to the screen because by the observer pattern, a change is reflected immediately on the console window.
+    return pageList.currentPage;
 }
 
+/**
+ * @brief Check if the given page is the same as the current page.
+ *
+ * This function compares the given page with the current page and
+ * returns true if they are the same.
+ *
+ * @param thisPage Pointer to the page to be compared.
+ * @return True if the pages are the same, false otherwise.
+ */
 bool PagingManager::isTheSamePage(struct Page* thisPage) {
     return thisPage == &(pageList.currentPage);
 }
 
-// function to display the initial page ( one-time use function )
+/**
+ * @brief Initialize the paging manager.
+ *
+ * This function initializes the pages and sets up initial view of status page on
+ * the console.
+ */
 void PagingManager::init() {
-    // Display the status page (the first page)
+    // Prepare all pages
+    
+    // Finally display the status page (the first page)
     pageList.currentPage.fpTitleF(PagingManager::rOutputStream, PagingManager::hConsole);
 }
 
+/**
+ * @brief Clear the console.
+ *
+ * This function clears the console.
+ */
 void PagingManager::clearConsole() {
     // TODO: Implement page clearing mechanism
     COORD topLeft = { 0, 0 };

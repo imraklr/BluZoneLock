@@ -1,3 +1,9 @@
+/**
+ * @file resource.h
+ *
+ * @author Rakesh Kumar
+ */
+
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by BluZoneLock-Win-Client.rc
