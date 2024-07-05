@@ -1,8 +1,8 @@
 // PagesInfo.h
 #pragma once
 
-#ifndef CONSOLEUI_H
-#define CONSOLEUI_H
+#ifndef PAGESINFO_H
+#define PAGESINFO_H
 
 #include <ostream>
 #include <stdint.h>
