@@ -263,7 +263,7 @@ struct Reusable {
 * once. It could store anything from repeated strings in console output to a thread or an 
 * object.
 */
-extern std::shared_ptr<struct Resuable[]> pageSharedStuff;
+extern std::shared_ptr<struct Reusable[]> pageSharedStuff;
 
 /**
 * @brief A struct that holds an array/list of pages with a function that can 
