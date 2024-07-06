@@ -170,47 +170,6 @@ extern void printDivider(
 extern void writeTitle(std::ostream& rOutputStream,HANDLE hConsole);
 
 /**
-* @brief Writes header to the console.
-* 
-* A function to print the header contents to the console. This function has different variants 
-* because every page has its own content.
-* NOTE: There might be some shared contents to be displayed which is stored in a shared data 
-* structure `struct Reusable` using `std::shared_ptr<struct Reusable[]>`.
-* 
-* @param A reference to `std::ostream`.
-* 
-* @return void
-*/
-void writeHeader(std::ostream&);
-
-/**
-* @brief Writes body to the console.
-*
-* A function to print the body contents to the console. This function has different variants
-* because every page has its own content.
-* NOTE: There might be some shared contents to be displayed which is stored in a shared data
-* structure `struct Reusable` using `std::shared_ptr<struct Reusable[]>`.
-*
-* @param A reference to `std::ostream`.
-*
-* @return void
-*/
-void writeBody(std::ostream&);
-
-/**
-* @brief Writes footer to the console.
-*
-* A function to print the footer contents to the console. This function has different variants
-* because every page has its own content.
-* NOTE: No shared content has to be kept with respect to the footer section.
-*
-* @param A reference to `std::ostream`.
-*
-* @return void
-*/
-void writeFooter(std::ostream&);
-
-/**
 * @brief A struct that refers to a page to be printed on the console.
 * 
 * This struct contains the pointers to the functions for printing the title, header, body and 
