@@ -23,6 +23,12 @@
 #define APPLICATION_NAME_LENGTH 11
 
  /**
+  * @brief Manages shared content across pages, allowing storage, retrieval, and manipulation.
+  * Each content item is identified by a unique ID. Ensuring ID uniqueness is not explicitly enforced.
+  */
+std::shared_ptr<std::unordered_map<int, void*>> pageSharedContent;
+
+ /**
  * @brief Writes title content to the console.
  *
  * A function to print the title to the console. This function is same for all pages.

@@ -27,6 +27,7 @@
 #include <memory>
 #include <sal.h>
 #include <Windows.h>
+#include <unordered_map>
 
 // only 5 pages are there: incoming, outgoing, status(or health), logging screen, error screen
 #define MAXIMUM_ALLOWED_NUMBER_OF_PAGES 5
@@ -207,22 +208,10 @@ struct Page {
 };
 
 /**
-* @brief A structure for storing shared contents of header and body sections.
-*/
-struct Reusable {
-    // The unique id of the content.
-    short id;
-    // The content.
-    void* content;
-};
-
-/**
-* @brief An instance of `std::shared_ptr<struct Reusable[]>` to store the shared contents 
-* of header & body sections in a `struct Reusable` struct. It needs to be defined only 
-* once. It could store anything from repeated strings in console output to a thread or an 
-* object.
-*/
-extern std::shared_ptr<struct Reusable[]> pageSharedStuff;
+ * @brief Manages shared content across pages, allowing storage, retrieval, and manipulation.
+ * Each content item is identified by a unique ID. Ensuring ID uniqueness is not explicitly enforced.
+ */
+extern std::shared_ptr<std::unordered_map<int, void*>> pageSharedContent;
 
 /**
 * @brief A struct that holds an array/list of pages with a function that can 
