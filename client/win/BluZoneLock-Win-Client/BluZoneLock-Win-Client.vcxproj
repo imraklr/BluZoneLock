@@ -136,6 +136,7 @@
     <ClCompile Include="src\UI\ConsoleUI\PagesInfo.cpp" />
     <ClCompile Include="src\UI\ConsoleUI\PagingManager.cpp" />
     <ClCompile Include="src\UI\ConsoleUI\Status\status.cpp" />
+    <ClCompile Include="src\Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="src\UI\ConsoleUI\Outgoing\outgoing.h" />
     <ClInclude Include="src\UI\ConsoleUI\PagingManager.h" />
     <ClInclude Include="src\UI\ConsoleUI\Status\status.h" />
+    <ClInclude Include="src\Utils\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BluZoneLock-Win-Client.rc" />
