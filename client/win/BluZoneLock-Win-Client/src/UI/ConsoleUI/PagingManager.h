@@ -120,6 +120,53 @@ class PagingManager {
 		*/
 		struct Page getNthPage(uint_fast8_t N);
 
+		/**
+		* @brief Show entire page (title, header (if any), body (if any) and footer (if any) sections)
+		* 
+		* @param pageNumber The page number of the page whose each is to be displayed.
+		*/
+		void showPage(uint_fast8_t pageNumber);
+
+		/**
+		* @brief Show title section only of page specified by page number in the parameter.
+		* 
+		* Note that direct calls to printing any section like in this function does not 
+		* guarantee nullptr checks
+		* 
+		* @param pageNumber The page number of the page whose title section is to be displayed.
+		*/
+		void showTitle(uint_fast8_t pageNumber);
+		
+		/**
+		* @brief Show header section only of page specified by page number in the parameter.
+		* 
+		* Note that direct calls to printing any section like in this function does not 
+		* guarantee nullptr checks
+		*
+		* @param pageNumber The page number of the page whose header section is to be displayed.
+		*/
+		void showHeader(uint_fast8_t pageNumber);
+
+		/**
+		* @brief Show body section only of page specified by page number in the parameter.
+		* 
+		* Note that direct calls to printing any section like in this function does not 
+		* guarantee nullptr checks
+		*
+		* @param pageNumber The page number of the page whose body section is to be displayed.
+		*/
+		void showBody(uint_fast8_t pageNumber);
+
+		/**
+		* @brief Show footer section only of page specified by page number in the parameter.
+		* 
+		* Note that direct calls to printing any section like in this function does not 
+		* guarantee nullptr checks
+		*
+		* @param pageNumber The page number of the page whose footer section is to be displayed.
+		*/
+		void showFooter(uint_fast8_t pageNumber);
+
 	private:
 		// page number
 		_Field_range_(MINIMUM_ALLOWED_NUMBER_OF_PAGES, MAXIMUM_ALLOWED_NUMBER_OF_PAGES) uint_fast8_t pageNumber;

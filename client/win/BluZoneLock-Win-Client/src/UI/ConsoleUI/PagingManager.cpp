@@ -207,3 +207,69 @@ struct Page PagingManager::getCurrentPage() {
 struct Page PagingManager::getNthPage(uint_fast8_t N) {
     return pageArray[N];
 }
+
+/**
+* @brief Show entire page (title, header (if any), body (if any) and footer (if any) sections)
+*
+* @param pageNumber The page number of the page whose each is to be displayed.
+*/
+void PagingManager::showPage(uint_fast8_t pageNumber) {
+    showTitle(pageNumber);
+    // check if header is available on this page
+    if(getNthPage(pageNumber - 1).fpHeaderF != nullptr)
+        showHeader(pageNumber);
+    // check if body is available on this page
+    if(getNthPage(pageNumber - 1).fpBodyF != nullptr)
+        showBody(pageNumber);
+    // check if footer is available on this page
+    if(getNthPage(pageNumber - 1).fpFooterF != nullptr)
+        showFooter(pageNumber);
+}
+
+/**
+* @brief Show title section only of page specified by page number in the parameter.
+* 
+* Note that direct calls to printing any section like in this function does not
+* guarantee nullptr checks
+*
+* @param pageNumber The page number of the page whose title section is to be displayed.
+*/
+void PagingManager::showTitle(uint_fast8_t pageNumber) {
+    getNthPage(pageNumber - 1).fpTitleF(PagingManager::rOutputStream, PagingManager::hConsole);
+}
+
+/**
+* @brief Show header section only of page specified by page number in the parameter.
+* 
+* Note that direct calls to printing any section like in this function does not
+* guarantee nullptr checks
+*
+* @param pageNumber The page number of the page whose header section is to be displayed.
+*/
+void PagingManager::showHeader(uint_fast8_t pageNumber) {
+    getNthPage(pageNumber - 1).fpHeaderF(PagingManager::rOutputStream, PagingManager::hConsole);
+}
+
+/**
+* @brief Show body section only of page specified by page number in the parameter.
+* 
+* Note that direct calls to printing any section like in this function does not
+* guarantee nullptr checks
+*
+* @param pageNumber The page number of the page whose body section is to be displayed.
+*/
+void PagingManager::showBody(uint_fast8_t pageNumber) {
+    getNthPage(pageNumber - 1).fpBodyF(PagingManager::rOutputStream, PagingManager::hConsole);
+}
+
+/**
+* @brief Show footer section only of page specified by page number in the parameter.
+* 
+* Note that direct calls to printing any section like in this function does not
+* guarantee nullptr checks
+*
+* @param pageNumber The page number of the page whose footer section is to be displayed.
+*/
+void PagingManager::showFooter(uint_fast8_t pageNumber) {
+    getNthPage(pageNumber - 1).fpFooterF(PagingManager::rOutputStream, PagingManager::hConsole);
+}

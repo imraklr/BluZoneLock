@@ -71,9 +71,9 @@ struct Page {
     // The four parts of any page: Title (Compulsory), Header (Compulsory), Body (Compulsory), 
     // Footer (Close/Exit notices, Optional)
     void (*fpTitleF)(std::ostream&,HANDLE);  // Function Pointer to `title`  function
-    void (*fpHeaderF)(std::ostream&); // Function Pointer to `header` function
-    void (*fpBodyF)(std::ostream&);   // Function Pointer to `body`   function
-    void (*fpFooterF)(std::ostream&); // Function Pointer to `footer` function
+    void (*fpHeaderF)(std::ostream&, HANDLE); // Function Pointer to `header` function
+    void (*fpBodyF)(std::ostream&, HANDLE);   // Function Pointer to `body`   function
+    void (*fpFooterF)(std::ostream&, HANDLE); // Function Pointer to `footer` function
 
     /**
      * A constructor to initialize an instance of `struct Page`.
