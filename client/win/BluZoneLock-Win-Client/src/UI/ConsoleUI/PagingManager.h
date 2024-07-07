@@ -13,6 +13,8 @@
 #include <stdint.h>
 #include <ostream>
 #include <Windows.h>
+#include <stdint.h>
+#include <sal.h>
 
 #include "PagesInfo.h"
 
@@ -93,7 +95,41 @@ class PagingManager {
 		 */
 		void clearConsole();
 
+		/**
+		* @brief Get the page number of the current page.
+		* 
+		* @return A number whose minimum value will be 1 and maximum will be MAXIMUM_ALLOWED_NUMBER_OF_PAGES 
+		* indicating the page number. Note that this function does not return the index of the array at which
+		* this current page is located.
+		*/
+		uint_fast8_t getCurrentPageNumber();
+
+		/**
+		* @brief Get the current page as `struct Page` instance.
+		* 
+		* @return An instance of `struct Page` which is the current page visible to the user through console.
+		*/
+		struct Page getCurrentPage();
+
+		/**
+		* @brief Get the N'th `struct Page` instance.
+		* 
+		* @param N Index of the page (not the page number)
+		* 
+		* @return An instance of `struct Page` from the array.
+		*/
+		struct Page getNthPage(uint_fast8_t N);
+
 	private:
+		// page number
+		_Field_range_(MINIMUM_ALLOWED_NUMBER_OF_PAGES, MAXIMUM_ALLOWED_NUMBER_OF_PAGES) uint_fast8_t pageNumber;
+
+		// Array of struct Page
+		struct Page pageArray[MAXIMUM_ALLOWED_NUMBER_OF_PAGES];
+
+		// Current page on which operations are performed
+		struct Page currentPage;
+
 		// Reference to the output stream.
 		std::ostream& rOutputStream;
 

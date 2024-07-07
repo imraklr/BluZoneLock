@@ -12,7 +12,6 @@
  * 4. Footer (Footer is not necessary, it is just a placeholder for future use)
  *
  * @author Rakesh Kumar
- * @date July 5, 2024
  */
 
 #include "PagesInfo.h"

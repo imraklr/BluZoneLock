@@ -11,11 +11,10 @@
 #include "PagingManager.h"
 #include "PagesInfo.h"
 #include <Windows.h>
+#include <stdint.h>
 
 // Static instance initialization
 static PagingManager* instance = nullptr;
-// Global instance of struct PageList
-struct PageList pageList;
 
 /**
  * @brief Get the singleton instance of PagingManager.
@@ -45,6 +44,10 @@ PagingManager& PagingManager::getInstance(std::ostream& rOutputStream, HANDLE hC
  */
 PagingManager::PagingManager(std::ostream& rOutputStream, HANDLE hConsole)
     : rOutputStream(rOutputStream), hConsole(hConsole) {
+    for (int i = 0;i < MAXIMUM_ALLOWED_NUMBER_OF_PAGES;i++)
+        pageArray[i] = {};
+    currentPage = {};
+    pageNumber = 0;
     // Constructor implementation
     PagingManager::init();
 }
@@ -57,16 +60,16 @@ PagingManager::PagingManager(std::ostream& rOutputStream, HANDLE hConsole)
  * @return The next page (instance of `struct Page`).
  */
 Page PagingManager::nextPage() {
-    pageList.index = (++(pageList.index)) % MAXIMUM_ALLOWED_NUMBER_OF_PAGES; // 0-indexing
-    pageList.currentPage = pageList.pageArray[pageList.index];
+    pageNumber = (++pageNumber) % MAXIMUM_ALLOWED_NUMBER_OF_PAGES;
+    struct Page currentPage = pageArray[pageNumber - 1];
 
     // Clear Console
     clearConsole();
     // Show the title
-    pageList.currentPage.fpTitleF(rOutputStream, hConsole);
+    currentPage.fpTitleF(rOutputStream, hConsole);
     // Show the header
 
-    return pageList.currentPage;
+    return currentPage;
 }
 
 /**
@@ -77,21 +80,21 @@ Page PagingManager::nextPage() {
  * @return The previous page (instance of `struct Page`).
  */
 Page PagingManager::prevPage() {
-    if (pageList.index == 0) {
-        pageList.index = MAXIMUM_ALLOWED_NUMBER_OF_PAGES - 1;
+    if (pageNumber == 1) {
+        pageNumber = MAXIMUM_ALLOWED_NUMBER_OF_PAGES;
     }
     else {
-        --(pageList.index);
+        --pageNumber;
     }
-    pageList.currentPage = pageList.pageArray[pageList.index];
+    struct Page currentPage = pageArray[pageNumber - 1];
 
     // Clear console
     clearConsole();
     // show the title
-    pageList.currentPage.fpTitleF(rOutputStream, hConsole);
+    currentPage.fpTitleF(rOutputStream, hConsole);
     // show the header
 
-    return pageList.currentPage;
+    return currentPage;
 }
 
 /**
@@ -109,17 +112,17 @@ Page PagingManager::mthPage(uint_fast8_t M) {
         M > MAXIMUM_ALLOWED_NUMBER_OF_PAGES && M < MINIMUM_ALLOWED_NUMBER_OF_PAGES
         )) {
         // M cannot be zero, as the user is not aware of 0-based indexing in computer programs.
-        pageList.index = M - 1;
-        pageList.currentPage = pageList.pageArray[pageList.index];
+        pageNumber = M;
+        struct Page currentPage = pageArray[pageNumber - 1];
     }
 
     // Clear console
     clearConsole();
     // show the title
-    pageList.currentPage.fpTitleF(rOutputStream, hConsole);
+    currentPage.fpTitleF(rOutputStream, hConsole);
     // show the header
 
-    return pageList.currentPage;
+    return currentPage;
 }
 
 /**
@@ -132,7 +135,7 @@ Page PagingManager::mthPage(uint_fast8_t M) {
  * @return True if the pages are the same, false otherwise.
  */
 bool PagingManager::isTheSamePage(struct Page* thisPage) {
-    return thisPage == &(pageList.currentPage);
+    return thisPage == &(currentPage);
 }
 
 /**
@@ -145,7 +148,7 @@ void PagingManager::init() {
     // Prepare all pages
     
     // Finally display the status page (the first page)
-    pageList.currentPage.fpTitleF(PagingManager::rOutputStream, PagingManager::hConsole);
+    // pageList.currentPage.fpTitleF(PagingManager::rOutputStream, PagingManager::hConsole);
 }
 
 /**
@@ -172,4 +175,35 @@ void PagingManager::clearConsole() {
 
     // Reset cursor position to top-left corner
     SetConsoleCursorPosition(console, topLeft);
+}
+
+/**
+* @brief Get the page number of the current page.
+*
+* @return A number whose minimum value will be 1 and maximum will be MAXIMUM_ALLOWED_NUMBER_OF_PAGES
+* indicating the page number. Note that this function does not return the index of the array at which
+* this current page is located.
+*/
+uint_fast8_t PagingManager::getCurrentPageNumber() {
+    return getCurrentPage().page_number;
+}
+
+/**
+* @brief Get the current page as `struct Page` instance.
+*
+* @return An instance of `struct Page` which is the current page visible to the user through console.
+*/
+struct Page PagingManager::getCurrentPage() {
+    return currentPage;
+}
+
+/**
+* @brief Get the N'th `struct Page` instance.
+* 
+* @param N Index of the page (not the page number)
+*
+* @return An instance of `struct Page` from the array.
+*/
+struct Page PagingManager::getNthPage(uint_fast8_t N) {
+    return pageArray[N];
 }
