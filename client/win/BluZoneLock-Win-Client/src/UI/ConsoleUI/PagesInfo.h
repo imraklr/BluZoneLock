@@ -87,12 +87,6 @@ struct Page {
 };
 
 /**
- * @brief Manages shared content across pages, allowing storage, retrieval, and manipulation.
- * Each content item is identified by a unique ID. Ensuring ID uniqueness is not explicitly enforced.
- */
-extern std::shared_ptr<std::unordered_map<int, void*>> pageSharedContent;
-
-/**
 * @brief A struct that holds an array/list of pages with a function that can 
 * add a page to the list, a constructor to initialize instance of `struct PageList`, and, 
 * a destructor to destruct the instance.
