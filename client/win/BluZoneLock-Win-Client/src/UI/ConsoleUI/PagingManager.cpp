@@ -55,18 +55,18 @@ PagingManager::PagingManager(std::ostream& rOutputStream, HANDLE hConsole)
 /**
  * @brief Move to the next page.
  *
- * This function changes the view to the next page and returns it.
+ * This function changes the view to the next page and returns a pointer to it.
  *
- * @return The next page (instance of `struct Page`).
+ * @return Pointer to the next page.
  */
-Page PagingManager::nextPage() {
+Page* PagingManager::nextPage() {
     pageNumber = (++pageNumber) % MAXIMUM_ALLOWED_NUMBER_OF_PAGES;
-    struct Page currentPage = pageArray[pageNumber - 1];
+    struct Page* currentPage = &pageArray[pageNumber - 1];
 
     // Clear Console
     clearConsole();
     // Show the title
-    currentPage.fpTitleF(rOutputStream, hConsole);
+    currentPage->fpTitleF(rOutputStream, hConsole);
     // Show the header
 
     return currentPage;
@@ -75,23 +75,23 @@ Page PagingManager::nextPage() {
 /**
  * @brief Move to the previous page.
  *
- * This function changes the view to the previous page and returns it.
+ * This function changes the view to the previous page and returns a pointer to it.
  *
- * @return The previous page (instance of `struct Page`).
+ * @return Pointer to the previous page.
  */
-Page PagingManager::prevPage() {
+Page* PagingManager::prevPage() {
     if (pageNumber == 1) {
         pageNumber = MAXIMUM_ALLOWED_NUMBER_OF_PAGES;
     }
     else {
         --pageNumber;
     }
-    struct Page currentPage = pageArray[pageNumber - 1];
+    struct Page* currentPage = &pageArray[pageNumber - 1];
 
     // Clear console
     clearConsole();
     // show the title
-    currentPage.fpTitleF(rOutputStream, hConsole);
+    currentPage->fpTitleF(rOutputStream, hConsole);
     // show the header
 
     return currentPage;
@@ -100,26 +100,26 @@ Page PagingManager::prevPage() {
 /**
  * @brief Move to the Mth page where M is the page number.
  *
- * This function changes the view to the Mth page and returns it.
+ * This function changes the view to the Mth page and returns a pointer to it.
  *
- * @return The Mth page (instance of `struct Page`) OR if incorrect page number is supplied 
- * then the current page instance is returned. Use this function in conjunction with 
+ * @return A pointer to Mth page OR if incorrect page number is supplied 
+ * then the pointer to current page is returned. Use this function in conjunction with 
  * `isTheSamePage(struct Page* thisPage)` function to know if returned page instance matches 
  * the page that the user is on. This prevents huge rewrites to the screen.
  */
-Page PagingManager::mthPage(uint_fast8_t M) {
+Page* PagingManager::mthPage(uint_fast8_t M) {
     if (!(
         M > MAXIMUM_ALLOWED_NUMBER_OF_PAGES && M < MINIMUM_ALLOWED_NUMBER_OF_PAGES
         )) {
         // M cannot be zero, as the user is not aware of 0-based indexing in computer programs.
         pageNumber = M;
-        struct Page currentPage = pageArray[pageNumber - 1];
+        struct Page* currentPage = &pageArray[pageNumber - 1];
     }
 
     // Clear console
     clearConsole();
     // show the title
-    currentPage.fpTitleF(rOutputStream, hConsole);
+    currentPage->fpTitleF(rOutputStream, hConsole);
     // show the header
 
     return currentPage;
@@ -135,7 +135,7 @@ Page PagingManager::mthPage(uint_fast8_t M) {
  * @return True if the pages are the same, false otherwise.
  */
 bool PagingManager::isTheSamePage(struct Page* thisPage) {
-    return thisPage == &(currentPage);
+    return thisPage == currentPage;
 }
 
 /**
@@ -185,7 +185,7 @@ void PagingManager::clearConsole() {
 * this current page is located.
 */
 uint_fast8_t PagingManager::getCurrentPageNumber() {
-    return getCurrentPage().page_number;
+    return getPointerToCurrentPage()->page_number;
 }
 
 /**
@@ -193,7 +193,7 @@ uint_fast8_t PagingManager::getCurrentPageNumber() {
 *
 * @return An instance of `struct Page` which is the current page visible to the user through console.
 */
-struct Page PagingManager::getCurrentPage() {
+struct Page* PagingManager::getPointerToCurrentPage() {
     return currentPage;
 }
 
@@ -204,8 +204,8 @@ struct Page PagingManager::getCurrentPage() {
 *
 * @return An instance of `struct Page` from the array.
 */
-struct Page PagingManager::getNthPage(uint_fast8_t N) {
-    return pageArray[N];
+struct Page* PagingManager::getPointerToNthPage(uint_fast8_t N) {
+    return &pageArray[N];
 }
 
 /**
@@ -216,13 +216,13 @@ struct Page PagingManager::getNthPage(uint_fast8_t N) {
 void PagingManager::showPage(uint_fast8_t pageNumber) {
     showTitle(pageNumber);
     // check if header is available on this page
-    if(getNthPage(pageNumber - 1).fpHeaderF != nullptr)
+    if(*getPointerToNthPage(pageNumber - 1)->fpHeaderF != nullptr)
         showHeader(pageNumber);
     // check if body is available on this page
-    if(getNthPage(pageNumber - 1).fpBodyF != nullptr)
+    if(getPointerToNthPage(pageNumber - 1)->fpBodyF != nullptr)
         showBody(pageNumber);
     // check if footer is available on this page
-    if(getNthPage(pageNumber - 1).fpFooterF != nullptr)
+    if(getPointerToNthPage(pageNumber - 1)->fpFooterF != nullptr)
         showFooter(pageNumber);
 }
 
@@ -235,7 +235,7 @@ void PagingManager::showPage(uint_fast8_t pageNumber) {
 * @param pageNumber The page number of the page whose title section is to be displayed.
 */
 void PagingManager::showTitle(uint_fast8_t pageNumber) {
-    getNthPage(pageNumber - 1).fpTitleF(PagingManager::rOutputStream, PagingManager::hConsole);
+    getPointerToNthPage(pageNumber - 1)->fpTitleF(PagingManager::rOutputStream, PagingManager::hConsole);
 }
 
 /**
@@ -247,7 +247,7 @@ void PagingManager::showTitle(uint_fast8_t pageNumber) {
 * @param pageNumber The page number of the page whose header section is to be displayed.
 */
 void PagingManager::showHeader(uint_fast8_t pageNumber) {
-    getNthPage(pageNumber - 1).fpHeaderF(PagingManager::rOutputStream, PagingManager::hConsole);
+    getPointerToNthPage(pageNumber - 1)->fpHeaderF(PagingManager::rOutputStream, PagingManager::hConsole);
 }
 
 /**
@@ -259,7 +259,7 @@ void PagingManager::showHeader(uint_fast8_t pageNumber) {
 * @param pageNumber The page number of the page whose body section is to be displayed.
 */
 void PagingManager::showBody(uint_fast8_t pageNumber) {
-    getNthPage(pageNumber - 1).fpBodyF(PagingManager::rOutputStream, PagingManager::hConsole);
+    getPointerToNthPage(pageNumber - 1)->fpBodyF(PagingManager::rOutputStream, PagingManager::hConsole);
 }
 
 /**
@@ -271,5 +271,5 @@ void PagingManager::showBody(uint_fast8_t pageNumber) {
 * @param pageNumber The page number of the page whose footer section is to be displayed.
 */
 void PagingManager::showFooter(uint_fast8_t pageNumber) {
-    getNthPage(pageNumber - 1).fpFooterF(PagingManager::rOutputStream, PagingManager::hConsole);
+    getPointerToNthPage(pageNumber - 1)->fpFooterF(PagingManager::rOutputStream, PagingManager::hConsole);
 }

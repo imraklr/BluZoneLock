@@ -50,32 +50,32 @@ class PagingManager {
 		void operator=(PagingManager const&) = delete;
 
 		/**
-		 * @brief Get the next page.
+		 * @brief Get the pointer to next page.
 		 *
-		 * This function returns the next page.
+		 * This function returns the pointer to the next page.
 		 *
-		 * @return The next page.
+		 * @return Pointer to next page.
 		 */
-		Page nextPage();
+		Page* nextPage();
 
 		/**
-		 * @brief Get the previous page.
+		 * @brief Get the pointer to previous page.
 		 *
-		 * This function returns the previous page.
+		 * This function returns the pointer to the previous page.
 		 *
-		 * @return The previous page.
+		 * @return Pointer to previous page.
 		 */
-		Page prevPage();
+		Page* prevPage();
 
 		/**
-		 * @brief Get the m-th page.
+		 * @brief Get the pointer to m-th page.
 		 *
-		 * This function returns the m-th page based on the provided index.
+		 * This function returns the pointer to the m-th page based on the provided index.
 		 *
 		 * @param m Index of the page to be returned.
 		 * @return The m-th page.
 		 */
-		Page mthPage(uint_fast8_t);
+		Page* mthPage(uint_fast8_t);
 
 		/**
 		 * @brief Check if the given page is the same as the current page.
@@ -105,20 +105,20 @@ class PagingManager {
 		uint_fast8_t getCurrentPageNumber();
 
 		/**
-		* @brief Get the current page as `struct Page` instance.
+		* @brief Get the current page as a pointer to `struct Page` type.
 		* 
-		* @return An instance of `struct Page` which is the current page visible to the user through console.
+		* @return A poinnter to `struct Page` type which is the current page visible to the user through console.
 		*/
-		struct Page getCurrentPage();
+		struct Page* getPointerToCurrentPage();
 
 		/**
-		* @brief Get the N'th `struct Page` instance.
+		* @brief Get the N'th as a pointer to `struct Page` type.
 		* 
 		* @param N Index of the page (not the page number)
 		* 
-		* @return An instance of `struct Page` from the array.
+		* @return A poinnter to `struct Page` type from the array.
 		*/
-		struct Page getNthPage(uint_fast8_t N);
+		struct Page* getPointerToNthPage(uint_fast8_t N);
 
 		/**
 		* @brief Show entire page (title, header (if any), body (if any) and footer (if any) sections)
@@ -174,8 +174,8 @@ class PagingManager {
 		// Array of struct Page
 		struct Page pageArray[MAXIMUM_ALLOWED_NUMBER_OF_PAGES];
 
-		// Current page on which operations are performed
-		struct Page currentPage;
+		// Pointer to current page which is visible to the user
+		struct Page* currentPage;
 
 		// Reference to the output stream.
 		std::ostream& rOutputStream;
