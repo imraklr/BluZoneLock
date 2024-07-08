@@ -44,7 +44,7 @@ int main() {
         // obtain PagingManager instance ( initializes pages and draws status page title )
         PagingManager& pagingManager = PagingManager::getInstance(rOutputStream, hConsole);
         // Display status page when the application is launched after warning messages
-        pagingManager.showPage(5);
+        pagingManager.showPage(1);
     }
 
     system("pause");
