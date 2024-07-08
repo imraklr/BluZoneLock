@@ -50,13 +50,13 @@ void printInRGB(
 
     rOutputStream << std::string(paddingLeft, ' ') << foregroundColorSequence << backgroundColorSequence << piece;
 
-    if (terminateLine) {
-        rOutputStream << std::endl;
-    }
-
     if (resetColorAfterOutput) {
         // reset color
         rOutputStream << "\x1B[0m";
+    }
+
+    if (terminateLine) {
+        rOutputStream << std::endl;
     }
 
     if (flushOutputStream) {
@@ -106,13 +106,13 @@ void printInRGB(
 
     rOutputStream << std::string(paddingLeft, ' ') << colorSequence << piece;
 
-    if (terminateLine) {
-        rOutputStream << std::endl;
-    }
-
     if (resetColorAfterOutput) {
         // reset color
         rOutputStream << "\x1B[0m";
+    }
+
+    if (terminateLine) {
+        rOutputStream << std::endl;
     }
 
     if (flushOutputStream) {
@@ -166,11 +166,12 @@ void printDivider(
     rOutputStream <<
         std::string(paddingLeft, ' ') <<
         colorSequence << std::setfill(dividerSymbol) <<
-        std::string(consoleWidth, dividerSymbol) <<
-        std::endl;
+        std::string(consoleWidth, dividerSymbol);
 
     // Reset color
     rOutputStream << "\x1B[0m";
+    // Change line
+    rOutputStream << "" << std::endl;
     // Flush output stream
     rOutputStream.flush();
 }
@@ -221,11 +222,12 @@ void printDivider(
         foregroundColorSequence <<
         backgroundColorSequence <<
         std::setfill(dividerSymbol) <<
-        std::string(consoleWidth, dividerSymbol) <<
-        std::endl;
+        std::string(consoleWidth, dividerSymbol);
 
     // Reset color
     rOutputStream << "\x1B[0m";
+    // Change line
+    rOutputStream << "" << std::endl;
     // Flush output stream
     rOutputStream.flush();
 }
