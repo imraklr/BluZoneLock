@@ -11,6 +11,12 @@
 #include "PagingManager.h"
 #include "PagesInfo.h"
 #include <Windows.h>
+#include "error/error.h"
+#include "Status/status.h"
+#include "Incoming/incoming.h"
+#include "Outgoing/outgoing.h"
+#include "logging/logging.h"
+#include "../../Utils/Utils.h"
 #include <stdint.h>
 
 // Static instance initialization
@@ -44,11 +50,10 @@ PagingManager& PagingManager::getInstance(std::ostream& rOutputStream, HANDLE hC
  */
 PagingManager::PagingManager(std::ostream& rOutputStream, HANDLE hConsole)
     : rOutputStream(rOutputStream), hConsole(hConsole) {
-    for (int i = 0;i < MAXIMUM_ALLOWED_NUMBER_OF_PAGES;i++)
+    for (int i = 0;i < MAXIMUM_ALLOWED_NUMBER_OF_PAGES;i++) {
         pageArray[i] = {};
-    currentPage = {};
-    pageNumber = 0;
-    // Constructor implementation
+        pageArray[i].page_number = i + 1;
+    }
     PagingManager::init();
 }
 
@@ -86,7 +91,7 @@ Page* PagingManager::prevPage() {
     else {
         --pageNumber;
     }
-    struct Page* currentPage = &pageArray[pageNumber - 1];
+    currentPage = &pageArray[pageNumber - 1];
 
     // Clear console
     clearConsole();
@@ -113,14 +118,16 @@ Page* PagingManager::mthPage(uint_fast8_t M) {
         )) {
         // M cannot be zero, as the user is not aware of 0-based indexing in computer programs.
         pageNumber = M;
-        struct Page* currentPage = &pageArray[pageNumber - 1];
+        struct Page* thePage = &pageArray[pageNumber - 1];
+        if (!isTheSamePage(thePage)) {
+            currentPage = &pageArray[pageNumber - 1];
+            // Clear console
+            clearConsole();
+            // show the title
+            currentPage->fpTitleF(rOutputStream, hConsole);
+            // show the header
+        }
     }
-
-    // Clear console
-    clearConsole();
-    // show the title
-    currentPage->fpTitleF(rOutputStream, hConsole);
-    // show the header
 
     return currentPage;
 }
@@ -136,19 +143,6 @@ Page* PagingManager::mthPage(uint_fast8_t M) {
  */
 bool PagingManager::isTheSamePage(struct Page* thisPage) {
     return thisPage == currentPage;
-}
-
-/**
- * @brief Initialize the paging manager.
- *
- * This function initializes the pages and sets up initial view of status page on
- * the console.
- */
-void PagingManager::init() {
-    // Prepare all pages
-    
-    // Finally display the status page (the first page)
-    // pageList.currentPage.fpTitleF(PagingManager::rOutputStream, PagingManager::hConsole);
 }
 
 /**
@@ -216,7 +210,7 @@ struct Page* PagingManager::getPointerToNthPage(uint_fast8_t N) {
 void PagingManager::showPage(uint_fast8_t pageNumber) {
     showTitle(pageNumber);
     // check if header is available on this page
-    if(*getPointerToNthPage(pageNumber - 1)->fpHeaderF != nullptr)
+    if(getPointerToNthPage(pageNumber - 1)->fpHeaderF != nullptr)
         showHeader(pageNumber);
     // check if body is available on this page
     if(getPointerToNthPage(pageNumber - 1)->fpBodyF != nullptr)
@@ -247,7 +241,7 @@ void PagingManager::showTitle(uint_fast8_t pageNumber) {
 * @param pageNumber The page number of the page whose header section is to be displayed.
 */
 void PagingManager::showHeader(uint_fast8_t pageNumber) {
-    getPointerToNthPage(pageNumber - 1)->fpHeaderF(PagingManager::rOutputStream, PagingManager::hConsole);
+    getPointerToNthPage(pageNumber - 1)->fpHeaderF(PagingManager::rOutputStream, PagingManager::hConsole, pageNumber);
 }
 
 /**
@@ -272,4 +266,30 @@ void PagingManager::showBody(uint_fast8_t pageNumber) {
 */
 void PagingManager::showFooter(uint_fast8_t pageNumber) {
     getPointerToNthPage(pageNumber - 1)->fpFooterF(PagingManager::rOutputStream, PagingManager::hConsole);
+}
+
+/**
+ * @brief Initialize the paging manager.
+ *
+ * This function initializes the pages and sets up initial view of status page on
+ * the console.
+ */
+void PagingManager::init() {
+    // prepare status page
+    initStatusPage(getPointerToNthPage(0));
+    // set the currentPage
+    currentPage = getPointerToNthPage(0);
+    pageNumber = currentPage->page_number;
+
+    // prepare incoming page
+    initIncomingPage(getPointerToNthPage(1));
+
+    // prepare outgoing page
+    initOutgoingPage(getPointerToNthPage(2));
+
+    // prepare logging page
+    initLoggingPage(getPointerToNthPage(3));
+
+    // prepare error page
+    initErrorPage(getPointerToNthPage(4));
 }

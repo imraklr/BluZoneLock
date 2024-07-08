@@ -9,11 +9,13 @@
 #ifndef STATUS_H
 #define STATUS_H
 
-#include "../ConsoleUI.h"
+#include "../PagesInfo.h"
 
 /**
 * @brief An instance of `struct Page` for status page.
+* 
+* @param page The status page.
 */
-extern struct Page statusPage;
+void initStatusPage(struct Page* page);
 
 #endif STATUS

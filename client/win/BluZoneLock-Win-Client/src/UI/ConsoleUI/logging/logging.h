@@ -9,6 +9,8 @@
 #ifndef LOGGING_H
 #define LOGGING_H
 
-extern struct Page loggingPage;
+#include "../PagesInfo.h"
+
+void initLoggingPage(struct Page* page);
 
 #endif

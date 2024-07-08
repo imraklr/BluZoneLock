@@ -27,6 +27,7 @@
 #include <memory>
 #include <sal.h>
 #include <Windows.h>
+#include "functional"
 #include <unordered_map>
 
 // only 5 pages are there: incoming, outgoing, status(or health), logging screen, error screen
@@ -70,10 +71,10 @@ struct Page {
 
     // The four parts of any page: Title (Compulsory), Header (Compulsory), Body (Compulsory), 
     // Footer (Close/Exit notices, Optional)
-    void (*fpTitleF)(std::ostream&,HANDLE);  // Function Pointer to `title`  function
-    void (*fpHeaderF)(std::ostream&, HANDLE); // Function Pointer to `header` function
-    void (*fpBodyF)(std::ostream&, HANDLE);   // Function Pointer to `body`   function
-    void (*fpFooterF)(std::ostream&, HANDLE); // Function Pointer to `footer` function
+    std::function<void(std::ostream&, HANDLE)> fpTitleF;  // Function Pointer to `title`  function
+    std::function<void(std::ostream&, HANDLE, uint_fast8_t)> fpHeaderF; // Function Pointer to `header` function
+    std::function<void(std::ostream&, HANDLE)> fpBodyF;   // Function Pointer to `body`   function
+    std::function<void(std::ostream&, HANDLE)> fpFooterF; // Function Pointer to `footer` function
 
     /**
      * A constructor to initialize an instance of `struct Page`.
@@ -83,7 +84,7 @@ struct Page {
      * changed later by the `init()` function call from the PagingManager
      * class instance.
      */
-    Page() : page_number(0), fpTitleF(&writeTitle), fpHeaderF(nullptr), fpBodyF(nullptr), fpFooterF(nullptr) {}
+    Page() : page_number(0), fpTitleF(writeTitle), fpHeaderF(nullptr), fpBodyF(nullptr), fpFooterF(nullptr) {}
 };
 
 #endif

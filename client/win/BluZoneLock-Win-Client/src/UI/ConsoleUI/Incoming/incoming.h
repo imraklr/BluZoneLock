@@ -8,6 +8,8 @@
 #ifndef INCOMING_H
 #define INCOMING_H
 
-extern struct Page incomingPage;
+#include "../PagesInfo.h"
+
+void initIncomingPage(struct Page* page);
 
 #endif

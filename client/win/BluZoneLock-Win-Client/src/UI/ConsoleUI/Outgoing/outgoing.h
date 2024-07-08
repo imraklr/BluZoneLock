@@ -9,6 +9,8 @@
 #ifndef OUTGOING_H
 #define OUTGOING_H
 
-extern struct Page outgoingPage;
+#include "../PagesInfo.h"
+
+void initOutgoingPage(struct Page* page);
 
 #endif
