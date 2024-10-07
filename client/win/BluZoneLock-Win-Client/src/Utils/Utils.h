@@ -6,9 +6,6 @@
  */
 #pragma once
 
-#ifndef UTILS_H
-#define UTILS_H
-
 #include <ostream>
 #include <string>
 #include <Windows.h>
@@ -134,5 +131,3 @@ extern void printDivider(
     int paddingLeft,
     HANDLE hConsole, std::ostream& rOutputStream
 );
-
-#endif

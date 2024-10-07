@@ -5,9 +5,6 @@
  */
 #pragma once
 
-#ifndef ERROR_H
-#define ERROR_H
-
 #include "../PagesInfo.h"
 
  /**
@@ -16,5 +13,3 @@
  * @param page The status page.
  */
 void initErrorPage(struct Page* page);
-
-#endif

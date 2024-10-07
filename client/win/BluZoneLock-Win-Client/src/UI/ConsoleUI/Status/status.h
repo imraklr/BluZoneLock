@@ -6,9 +6,6 @@
 
 #pragma once
 
-#ifndef STATUS_H
-#define STATUS_H
-
 #include "../PagesInfo.h"
 
 /**
@@ -17,5 +14,3 @@
 * @param page The status page.
 */
 void initStatusPage(struct Page* page);
-
-#endif STATUS

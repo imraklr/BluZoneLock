@@ -7,9 +7,6 @@
  */
 #pragma once
 
-#ifndef PAGING_MANAGER_H
-#define PAGING_MANAGER_H
-
 #include <stdint.h>
 #include <ostream>
 #include <Windows.h>
@@ -202,5 +199,3 @@ class PagingManager {
 		*/
 		void init();
 };
-
-#endif

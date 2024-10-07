@@ -19,9 +19,6 @@
  */
 #pragma once
 
-#ifndef PAGESINFO_H
-#define PAGESINFO_H
-
 #include <ostream>
 #include <stdint.h>
 #include <memory>
@@ -86,5 +83,3 @@ struct Page {
      */
     Page() : page_number(0), fpTitleF(writeTitle), fpHeaderF(nullptr), fpBodyF(nullptr), fpFooterF(nullptr) {}
 };
-
-#endif
