@@ -10,7 +10,7 @@
 
 #include <Windows.h>
 #include <iostream>
-#include "UI/ConsoleUI/PagingManager.h"
+#include "UI/ConsoleUI/page/page.h"
 
 void performPreChecks(std::ostream&);
 void postLaunchWarnings(std::ostream&, std::ostream&, HANDLE);
@@ -41,11 +41,10 @@ int main() {
         performPreChecks(rOutputStream);
         // display warnings after console application launch
         postLaunchWarnings(rOutputStream, rErrorStream, hConsole);
-        // obtain PagingManager instance ( initializes pages and draws status page title )
-        PagingManager& pagingManager = PagingManager::getInstance(rOutputStream, hConsole);
-        // Display status page when the application is launched after warning messages
-        pagingManager.showPage(1);
     }
+
+    writeTitle(rOutputStream, hConsole);
+    initPage(rOutputStream, hConsole);
 
     system("pause");
 
