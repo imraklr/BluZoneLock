@@ -21,7 +21,7 @@
     <ClCompile Include="src\Utils\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\UI\ConsoleUI\page\page.cpp">
+    <ClCompile Include="src\console\page\page.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClInclude Include="src\Utils\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\UI\ConsoleUI\page\page.h">
+    <ClInclude Include="src\console\page\page.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

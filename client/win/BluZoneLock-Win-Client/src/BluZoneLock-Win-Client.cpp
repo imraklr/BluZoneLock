@@ -10,7 +10,7 @@
 
 #include <Windows.h>
 #include <iostream>
-#include "UI/ConsoleUI/page/page.h"
+#include "console/page/page.h"
 
 void performPreChecks(std::ostream&);
 void postLaunchWarnings(std::ostream&, std::ostream&, HANDLE);
