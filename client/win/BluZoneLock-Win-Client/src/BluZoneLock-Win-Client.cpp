@@ -11,6 +11,7 @@
 #include <Windows.h>
 #include <iostream>
 #include "console/page/page.h"
+#include "console/cmd-dispatcher/header/CmdDispatcher.h"
 
 void performPreChecks(std::ostream&);
 void postLaunchWarnings(std::ostream&, std::ostream&, HANDLE);
@@ -46,7 +47,14 @@ int main() {
     writeTitle(rOutputStream, hConsole);
     initPage(rOutputStream, hConsole);
 
-    system("pause");
+    CmdDispatcher& cmdDispatcher = CmdDispatcher::getInstance();
+
+    // REPL
+    std::string input;
+    while (true) {
+        std::cin >> input;
+        cmdDispatcher.dispatch(input);
+    }
 
     return 0;
 }
