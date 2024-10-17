@@ -10,7 +10,7 @@
 
 #include <Windows.h>
 #include <iostream>
-#include "console/page/page.h"
+#include "console/page/header/page.h"
 #include "cmd-dispatcher/header/CmdDispatcher.h"
 
 void performPreChecks(std::ostream&);

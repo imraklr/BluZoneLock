@@ -18,13 +18,13 @@
     <ClCompile Include="src/BluZoneLock-Win-Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utils\Utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\console\page\page.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\cmd-dispatcher\CmdDispatcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\console\utils\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,13 +32,13 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Utils\Utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\console\page\page.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\cmd-dispatcher\header\CmdDispatcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\console\utils\header\Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\console\page\header\page.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,12 +4,12 @@
  * @author Rakesh Kumar
  */
 
-#include "page.h"
+#include "header/page.h"
 #include <string>
 #include <windows.h>
 #include <iostream>
 #include <stdint.h>
-#include "../../Utils/Utils.h"
+#include "../utils/header/Utils.h"
 
 void writeTitle(std::ostream& rOutputStream, HANDLE hConsole) {
 
