@@ -11,7 +11,7 @@
 #include <Windows.h>
 #include <iostream>
 #include "console/page/page.h"
-#include "console/cmd-dispatcher/header/CmdDispatcher.h"
+#include "cmd-dispatcher/header/CmdDispatcher.h"
 
 void performPreChecks(std::ostream&);
 void postLaunchWarnings(std::ostream&, std::ostream&, HANDLE);

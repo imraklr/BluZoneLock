@@ -24,7 +24,7 @@
     <ClCompile Include="src\console\page\page.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\console\cmd-dispatcher\CmdDispatcher.cpp">
+    <ClCompile Include="src\cmd-dispatcher\CmdDispatcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClInclude Include="src\console\page\page.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\console\cmd-dispatcher\header\CmdDispatcher.h">
+    <ClInclude Include="src\cmd-dispatcher\header\CmdDispatcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -128,13 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src/BluZoneLock-Win-Client.cpp" />
-    <ClCompile Include="src\console\cmd-dispatcher\CmdDispatcher.cpp" />
+    <ClCompile Include="src\cmd-dispatcher\CmdDispatcher.cpp" />
     <ClCompile Include="src\console\page\page.cpp" />
     <ClCompile Include="src\Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="src\console\cmd-dispatcher\header\CmdDispatcher.h" />
+    <ClInclude Include="src\cmd-dispatcher\header\CmdDispatcher.h" />
     <ClInclude Include="src\console\page\page.h" />
     <ClInclude Include="src\Utils\Utils.h" />
   </ItemGroup>
